@@ -1,19 +1,33 @@
-# Ignore Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-# Ignore dataset
-datasets/
-
-# Ignore Python cache files
+# Python cache files
 __pycache__/
 *.py[cod]
+*.pyo
 
-# Ignore environment files
-.env
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
-# Ignore unnecessary system files
+# Model files (optional, if you don't want to include them in the repo)
+*.pkl
+
+# Environment files (e.g., virtual environments)
+env/
+venv/
+*.env
+
+# Operating system files
 .DS_Store
 Thumbs.db
 
-# Ignore virtual environment folder
-venv/
+# Docker-specific files (optional, if you're excluding them)
+*.dockerignore
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Dataset files (optional, if they are large or sensitive)
+datasets/
+
+# Ignore IDE or editor-specific files
+.vscode/
+.idea/
