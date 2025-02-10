@@ -153,6 +153,7 @@ uvicorn main:app --reload
 ---
 
 ## File Structure
+```plaintext
 containerized-ml-model/
 ├── datasets/                     # (Optional) Dataset files
 ├── __pycache__/                  # Python cache (ignored)
@@ -164,7 +165,7 @@ containerized-ml-model/
 ├── main.py                       # FastAPI application
 ├── requirements.txt              # Python dependencies
 └── README.md                     # Documentation
-
+```
 ---
 
 ## Docker Hub
