@@ -18,15 +18,17 @@ venv/
 .DS_Store
 Thumbs.db
 
-# Docker-specific files (optional, if you're excluding them)
-*.dockerignore
-
-# Logs and temporary files
+# Docker-specific files
+.dockerignore
 *.log
 *.tmp
 
 # Dataset files (optional, if they are large or sensitive)
 datasets/
+
+# Kubernetes manifests backup files
+*.yaml~
+*.yml~
 
 # Ignore IDE or editor-specific files
 .vscode/

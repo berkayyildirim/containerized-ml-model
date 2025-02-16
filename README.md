@@ -1,22 +1,16 @@
 # Insurance Prediction API
 
-This project provides a **containerized REST API** for predicting insurance charges based on user inputs using a trained machine learning model. The API is implemented using **FastAPI**, and the container is built and managed with **Docker**.
+This project provides a **containerized REST API** for predicting insurance charges based on user inputs using a trained Machine Learning model. The API is built with **FastAPI**, containerized with **Docker**, and deployed on **Kubernetes** for scalability.
 
----
 
-## Features
+## ✨ Features
+- **ML-powered RESTful API** → Predicts insurance charges using a Random Forest Regressor with **FastAPI**.
+- **Dockerized** → Easily deployable with Docker & Kubernetes.
+- **Interactive API Docs** → Swagger UI (/docs) and ReDoc (/redoc).
+- **Scalable Deployment** → Runs on Kubernetes (Minikube/AWS EKS).
 
-- RESTful API with **FastAPI**.
-- Predicts insurance charges using a pre-trained **Random Forest Regressor** model.
-- Easy deployment with **Docker**.
-- Interactive API documentation available via **Swagger UI** and **ReDoc**.
-- Hosted Docker image available on **Docker Hub**.
-
----
-
-## Machine Learning Model: Random Forest Regressor
-
-The API is powered by a **Random Forest Regressor**, a versatile and robust machine learning algorithm that excels at predicting continuous values. Below are the details of the model and its performance.
+## 🤖 Machine Learning Model: Random Forest Regressor
+The API is powered by a **Random Forest Regressor**, a robust algorithm for predicting insurance charges.
 
 ### **Model Details**
 
@@ -35,20 +29,41 @@ The API is powered by a **Random Forest Regressor**, a versatile and robust mach
   - `smoker`: Whether the policyholder is a smoker (1 = Yes, 0 = No).
   - `region`: Categorical region indicators (northwest, southeast, southwest).
 
-### **Model Performance**
-
-The model was evaluated using the following metrics on a validation dataset:
-
-- **Root Mean Squared Error (RMSE):** `4383.58`
-  - Lower RMSE indicates better predictive accuracy.
-- **R² Score:** `0.876`
-  - The R² score of `0.876` means that 87.6% of the variance in insurance charges is explained by the model.
+- **Model Performance**
+  - **Root Mean Squared Error (RMSE):** `4383.58`
+    - Lower RMSE indicates better predictive accuracy.
+  - **R² Score:** `0.876`
+    - The R² score of `0.876` means that 87.6% of the variance in insurance charges is explained by the model.
 
 These results demonstrate that the Random Forest model provides accurate and reliable predictions for insurance charges.
 
-### **Prediction Example**
+## 📌 Getting Started
 
-The model takes input in the following format:
+### 1. Clone the Repository
+```bash
+git clone https://github.com/berkayyildirim/containerized-ml-model.git
+cd containerized-ml-model
+```
+
+### 2. Run with Docker 🐳
+Option 1: Pull Pre-built Image from Docker Hub
+```bash
+docker pull byberkayyildirim/insurance-prediction-api:latest
+docker run -p 8000:8000 byberkayyildirim/insurance-prediction-api:latest
+```
+
+Option 2: Build & Run Locally
+```bash
+docker build -t insurance-prediction-api .
+docker run -p 8000:8000 insurance-prediction-api
+```
+
+### 3️. Access the API 🌐
+- Swagger UI → http://localhost:8000/docs
+- ReDoc → http://localhost:8000/redoc
+
+### 4️. Make a Prediction (POST Request)
+Example Request:
 ```json
 {
     "age": 30,
@@ -62,95 +77,40 @@ The model takes input in the following format:
 }
 ```
 
-The output prediction is:
+Response:
 ```json
 {
     "predicted_insurance_charge": 21421.72
 }
 ```
 
----
-
-## Requirements
-
-To run this project, you need:
-- **Docker** installed on your system.
-
----
-
-## Getting Started
-
-### **1. Pull the Docker Image**
-Pull the pre-built image from Docker Hub:
+## ☸️ Deploying on Kubernetes
+### 1️. Start Minikube
 ```bash
-docker pull byberkayyildirim/insurance-prediction-api:latest
+minikube start
 ```
-### **2. Run the Docker Container**
-Start the API server:
+
+### 2️. Deploy to Kubernetes
 ```bash
-docker run -p 8000:8000 byberkayyildirim/insurance-prediction-api:latest
-```
-### **3. Access the API**
-- Swagger UI: http://localhost:8000/docs \
-Interactive documentation for testing endpoints.
-- ReDoc: http://localhost:8000/redoc \
-Alternate API documentation.
-- Base URL: http://localhost:8000
-
----
-
-## Usage
-
-### POST /predict/
-Send a JSON payload to the /predict/ endpoint to get insurance charge predictions.
-
-#### Example Request
-```json
-{
-    "age": 30,
-    "sex": 1,
-    "bmi": 28.5,
-    "children": 2,
-    "smoker": 1,
-    "region_northwest": 0,
-    "region_southeast": 1,
-    "region_southwest": 0
-}
-```
-#### Example Response
-```json
-{
-    "predicted_insurance_charge": 21421.72211734341
-}
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
 ```
 
----
-## Development Setup
-
-### 1. Clone the Repository
+### 3. Verify Deployment
 ```bash
-git clone https://github.com/YOUR_USERNAME/containerized-ml-model.git
-cd containerized-ml-model
+kubectl get pods
+kubectl get svc
 ```
 
-### 2. Build and Run the Docker Container
+### 4️. Access the API in Kubernetes
 ```bash
-docker build -t insurance-prediction-api .
-docker run -p 8000:8000 insurance-prediction-api
+kubectl port-forward svc/insurance-api-service 8000:80
 ```
 
-### 3. Install Dependencies Locally (Optional)
-If running without Docker, install dependencies with:
+Now, access the API at:
 ```bash
-pip install -r requirements.txt
+http://127.0.0.1:8000/predict/
 ```
-
-### 4. Run the API Locally (Optional)
-```bash
-uvicorn main:app --reload
-```
-
----
 
 ## File Structure
 ```plaintext
@@ -160,22 +120,21 @@ containerized-ml-model/
 ├── .ipynb_checkpoints/           # Jupyter Notebook checkpoints (ignored)
 ├── .gitignore                    # Git ignore file
 ├── Dockerfile                    # Docker instructions for containerizing the app
-├── insurance_model.pkl           # Trained machine learning model
+├── deployment.yaml               # Kubernetes Deployment
+├── service.yaml                  # Kubernetes Service
+├── insurance_model.pkl           # Trained ML model
 ├── insurance.ipynb               # Jupyter Notebook for model training
 ├── main.py                       # FastAPI application
 ├── requirements.txt              # Python dependencies
 └── README.md                     # Documentation
 ```
----
 
-## Docker Hub
+## 🐳 Docker Hub
 The Docker image is publicly available on Docker Hub:\
 byberkayyildirim/insurance-prediction-api
 
----
+## 📩 Contact
 
-## Contact
-
-For any questions or collaboration requests, feel free to reach out:
+For any questions or collaboration requests:
 - GitHub: byberkayyildirim
 - Docker Hub: byberkayyildirim
