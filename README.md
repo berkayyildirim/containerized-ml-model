@@ -58,11 +58,11 @@ docker build -t insurance-prediction-api .
 docker run -p 8000:8000 insurance-prediction-api
 ```
 
-### 3️. Access the API 🌐
+### 3. Access the API 🌐
 - Swagger UI → http://localhost:8000/docs
 - ReDoc → http://localhost:8000/redoc
 
-### 4️. Make a Prediction (POST Request)
+### 4. Make a Prediction (POST Request)
 Example Request:
 ```json
 {
@@ -85,12 +85,12 @@ Response:
 ```
 
 ## ☸️ Deploying on Kubernetes
-### 1️. Start Minikube
+### 1. Start Minikube
 ```bash
 minikube start
 ```
 
-### 2️. Deploy to Kubernetes
+### 2. Deploy to Kubernetes
 ```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
@@ -102,7 +102,7 @@ kubectl get pods
 kubectl get svc
 ```
 
-### 4️. Access the API in Kubernetes
+### 4. Access the API in Kubernetes
 ```bash
 kubectl port-forward svc/insurance-api-service 8000:80
 ```
