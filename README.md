@@ -132,9 +132,3 @@ containerized-ml-model/
 ## 🐳 Docker Hub
 The Docker image is publicly available on Docker Hub:\
 byberkayyildirim/insurance-prediction-api
-
-## 📩 Contact
-
-For any questions or collaboration requests:
-- GitHub: byberkayyildirim
-- Docker Hub: byberkayyildirim
